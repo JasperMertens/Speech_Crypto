@@ -1,0 +1,18 @@
+CC=gcc
+CFLAGS=-c -g -Wall -pedantic
+SOURCES=test.c aes.c format.c encryption.c main.c montgomery2.c padding.c handshake.c global.c datagram.c master_fsm.c slave_fsm.c digest-info.c sha256.c functions.c
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=run_me
+
+all: $(SOURCES) $(EXECUTABLE)
+    
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(OBJECTS) -o $@
+
+.c.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+.PHONY : clean
+clean:
+	-rm $(OBJECTS)
+
